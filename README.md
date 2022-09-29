@@ -1,2 +1,2 @@
 # artificer-handbook-api
-API for the artificer handbook, calculates metal shapes and offers useful tools for metal and woodworkers in general, it offers a easy way to calculate complementary sizes and angles, otimization on material use, and a easy way to store project data.
+API for the artificer handbook, it offers useful tools for metal and wood workers in general, calculating complementary sizes and angles, optimization on material use based on available materials input, and a easy way to store project data.
