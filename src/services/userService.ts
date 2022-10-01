@@ -23,7 +23,7 @@ async function signUp(createUserData: CreateUserData) {
   await userRepository.insert({ ...createUserData, password: hashedPassword });
 }
 
-async function signIn(loginData: CreateUserData) {
+async function signIn(loginData: any) {
   const user = await getUserOrFail(loginData);
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
 

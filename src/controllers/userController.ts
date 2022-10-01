@@ -1,9 +1,15 @@
+import { CreateUserData } from './../services/userService';
 import { Request, Response } from 'express';
 import userService from '../services/userService';
 
 async function signUp(req: Request, res: Response) {
   const user = req.body;
-  await userService.signUp(user);
+  const CreateUserData = {
+    username: user.username,
+    email: user.email,
+    password: user.password
+  }
+  await userService.signUp(CreateUserData);
 
   res.sendStatus(201);
 }

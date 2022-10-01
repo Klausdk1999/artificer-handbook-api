@@ -2,6 +2,7 @@ import { Router } from 'express';
 import userController from '../controllers/userController';
 import { validateSchemaMiddleware } from '../middlewares/validateSchemaMiddleware';
 import { userSchema } from '../schemas/userSchema';
+import { loginSchema } from '../schemas/loginSchema';
 
 const userRouter = Router();
 
@@ -12,7 +13,7 @@ userRouter.post(
 );
 userRouter.post(
   '/sign-in',
-  validateSchemaMiddleware(userSchema),
+  validateSchemaMiddleware(loginSchema),
   userController.signIn
 );
 
