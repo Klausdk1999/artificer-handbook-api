@@ -1,26 +1,41 @@
-import prisma from '../config/database';
+import prisma from "../config/database.js";
+import { CreateProjectData } from "../services/projectsService.js";
 
-// function getVoucherByCode(code: string) {
-//   return prisma.voucher.findUnique({
-//     where: { code }
-//   });
-// }
+async function create(createProjectData: CreateProjectData) {
+  await prisma.project.create({
+    data: createProjectData,
+  });
+}
 
-// function createVoucher(code: string, discount: number) {
-//   return prisma.voucher.create({
-//     data: { code, discount }
-//   });
-// }
+function getAll() {
 
-// function useVoucher(code: string) {
-//   return prisma.voucher.update({
-//     where: { code },
-//     data: { used: true }
-//   });
-// }
+  return prisma.project.findMany({
+    orderBy: { date: "desc" }
+  });
+}
 
-// export default {
-//   getVoucherByCode,
-//   createVoucher,
-//   useVoucher
-// };
+function find(id: number) {
+  return prisma.project.findUnique({
+    where: { id },
+  });
+}
+
+function findByTitle(title: string) {
+  return prisma.project.findUnique({
+    where: { title },
+  });
+}
+
+async function remove(id: number) {
+  await prisma.project.delete({
+    where: { id },
+  });
+}
+
+export const projectRepository = {
+  create,
+  getAll,
+  find,
+  findByTitle,
+  remove,
+};
