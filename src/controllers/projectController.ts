@@ -1,13 +1,7 @@
 import { Request, Response } from "express";
-import { projectSchema } from "../schemas/projectSchemas.js";
-import { projectService } from "../services/projectsService.js";
-import { wrongSchemaError } from "../utils/errorUtils.js";
+import { projectService } from "../services/projectsService";
 
 async function insert(req: Request, res: Response) {
-  const validation = projectSchema.validate(req.body);
-  if (validation.error) {
-    throw wrongSchemaError();
-  }
 
   await projectService.insert(req.body);
 
@@ -15,7 +9,9 @@ async function insert(req: Request, res: Response) {
 }
 
 async function get(req: Request, res: Response) {
+
   const projects = await projectService.get();
+
   res.send(projects);
 }
 

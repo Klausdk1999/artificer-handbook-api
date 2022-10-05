@@ -1,6 +1,6 @@
 import { Project } from "@prisma/client";
 import { projectRepository } from "../repositories/projectRepository";
-import { notFoundError } from "../utils/errorUtils.js";
+import { notFoundError } from "../utils/errorUtils";
 
 export type CreateProjectData = Omit<Project, "id" | "date">;
 
@@ -15,7 +15,7 @@ async function insert(createProjectData: CreateProjectData) {
 }
 
 async function getById(id: number) {
-  const project = await projectRepository.find(id);
+  const project = await projectRepository.findById(id);
   if (!project) throw notFoundError();
 
   return project;

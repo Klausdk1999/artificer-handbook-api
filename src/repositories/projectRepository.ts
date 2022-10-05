@@ -1,5 +1,5 @@
-import prisma from "../config/database.js";
-import { CreateProjectData } from "../services/projectsService.js";
+import prisma from "../config/database";
+import { CreateProjectData } from "../services/projectsService";
 
 async function create(createProjectData: CreateProjectData) {
   await prisma.project.create({
@@ -14,15 +14,15 @@ function getAll() {
   });
 }
 
-function find(id: number) {
+function findById(id: number) {
   return prisma.project.findUnique({
     where: { id },
   });
 }
 
 function findByTitle(title: string) {
-  return prisma.project.findUnique({
-    where: { title },
+  return prisma.project.findMany({
+    where: { title:title },
   });
 }
 
@@ -35,7 +35,7 @@ async function remove(id: number) {
 export const projectRepository = {
   create,
   getAll,
-  find,
+  findById,
   findByTitle,
   remove,
 };

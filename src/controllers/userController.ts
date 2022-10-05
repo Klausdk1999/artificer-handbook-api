@@ -1,4 +1,3 @@
-import { CreateUserData } from './../services/userService';
 import { Request, Response } from 'express';
 import userService from '../services/userService';
 
