@@ -8,7 +8,7 @@ async function insert(createProjectData: CreateProjectData) {
   const existingproject = await projectRepository.findByTitle(
     createProjectData.title
   );
-  if (existingproject){
+  if (existingproject.length>0){
     createProjectData.title+="(1)";
   }
   await projectRepository.create(createProjectData);

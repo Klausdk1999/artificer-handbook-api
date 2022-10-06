@@ -40,6 +40,6 @@ model Media {
   type      String 
   media     String
   project   Project @relation(fields: [projectId], references: [id])
-  projectId         Int
+  projectId Int
   @@map("medias")
 }

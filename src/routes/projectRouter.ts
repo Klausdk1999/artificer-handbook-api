@@ -5,8 +5,8 @@ import { projectSchema } from "../schemas/projectSchemas";
 
 const projectRouter = Router();
 
-projectRouter.post("/",  validateSchemaMiddleware(projectSchema), projectController.insert);
-projectRouter.get("/", projectController.get);
-projectRouter.get("/:id", projectController.getById);
+projectRouter.post("/project",  validateSchemaMiddleware(projectSchema), projectController.insert);
+projectRouter.get("/project", projectController.get);
+projectRouter.get("/project/:id", projectController.getById);
 
 export default projectRouter;

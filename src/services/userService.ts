@@ -27,7 +27,7 @@ async function signIn(loginData: any) {
   const user = await getUserOrFail(loginData);
   const token = jwt.sign({ userId: user.id }, process.env.JWT_SECRET);
 
-  return token;
+  return {token,id:user.id,username:user.username};
 }
 
 async function findById(id: number) {
