@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import calcService from '../services/calcService';
 
 async function fourSides(req: Request, res: Response) {
-  const { base,left,top,right,angle,angleLocation} = req.body;
+  const { base, left, top, right, angle, angleLocation } = req.body;
   const result = await calcService.calcPieces(base,left,top,right,angle,angleLocation);
 
   res.send(result).status(200);

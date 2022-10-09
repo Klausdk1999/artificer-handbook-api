@@ -1,14 +1,25 @@
 import prisma from "../config/database";
-import { CreateProjectData } from "../services/projectsService";
+import { CreateProjectData,CreateFileData } from "../services/projectsService";
 
 async function create(createProjectData: CreateProjectData) {
-  await prisma.project.create({
+  let project = await prisma.project.create({
     data: createProjectData,
+  });
+
+  return project;
+}
+
+async function createFile(CreateFileData:CreateFileData) {
+  await prisma.$queryRaw`INSERT INTO files(name,media,"projectId") VALUES (${CreateFileData.name},${CreateFileData.media},${Number(CreateFileData.projectId)});`;
+}
+
+async function readFile(id:number) {
+  return await prisma.file.findFirst({
+    where: { projectId: Number(id) }
   });
 }
 
 function getAll() {
-
   return prisma.project.findMany({
     orderBy: { date: "desc" }
   });
@@ -34,8 +45,10 @@ async function remove(id: number) {
 
 export const projectRepository = {
   create,
+  createFile,
   getAll,
   findById,
   findByTitle,
   remove,
+  readFile
 };

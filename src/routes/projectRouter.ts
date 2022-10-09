@@ -4,9 +4,11 @@ import { validateSchemaMiddleware } from "../middlewares/validateSchemaMiddlewar
 import { projectSchema } from "../schemas/projectSchemas";
 
 const projectRouter = Router();
-
-projectRouter.post("/project",  validateSchemaMiddleware(projectSchema), projectController.insert);
+//validateSchemaMiddleware(projectSchema)
+projectRouter.post("/project", projectController.insert);
 projectRouter.get("/project", projectController.get);
 projectRouter.get("/project/:id", projectController.getById);
+projectRouter.post('/upload/:id', projectController.fileSave);
+projectRouter.get("/project/file/:id", projectController.sendFile);
 
 export default projectRouter;

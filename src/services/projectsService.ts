@@ -1,8 +1,9 @@
-import { Project } from "@prisma/client";
+import { Project , File } from "@prisma/client";
 import { projectRepository } from "../repositories/projectRepository";
 import { notFoundError } from "../utils/errorUtils";
 
 export type CreateProjectData = Omit<Project, "id" | "date">;
+export type CreateFileData = Omit<File, "id">;
 
 async function insert(createProjectData: CreateProjectData) {
   const existingproject = await projectRepository.findByTitle(
@@ -11,7 +12,7 @@ async function insert(createProjectData: CreateProjectData) {
   if (existingproject.length>0){
     createProjectData.title+="(1)";
   }
-  await projectRepository.create(createProjectData);
+  return await projectRepository.create(createProjectData);
 }
 
 async function getById(id: number) {
@@ -25,8 +26,25 @@ async function get() {
   return projectRepository.getAll();
 }
 
+async function saveFile(filepath:string,id:number,name:string) {
+  let data:CreateFileData = {
+    name:name,media:filepath,projectId:id
+  }
+
+  await projectRepository.createFile(data);
+  
+}
+
+async function getFile(id:number) {
+
+  return await projectRepository.readFile(id);
+  
+}
+
 export const projectService = {
   insert,
   get,
-  getById
+  getById,
+  saveFile,
+  getFile
 };

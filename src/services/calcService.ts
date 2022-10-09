@@ -11,9 +11,11 @@ import { conflictError } from '../utils/errorUtils';
 //   amount: number;
 // }
 /// logica tendo os angulos
+
 async function calcPieces(base:number, left:number,
  top:number , right:number, angle:number,angleLocation:string) {
   let arrSides = [base,left,top,right];
+  
   // let rotatedSides=[0,0,0,0]
   // let arrAngles = ["baseLeft","topLeft","topRight","baseRight"];
   //angle location: base-left,base-right,top-left,top-right

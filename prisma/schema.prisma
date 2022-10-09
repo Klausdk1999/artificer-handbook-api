@@ -29,17 +29,16 @@ model Project {
   date            DateTime @db.Timestamp() @default(now())
   youtubeLink     String?
   externalURL     String?
-  medias          Media[]  
+  files           File[]  
   
   @@map("projects")
 }
 
-model Media {
+model File {
   id        Int    @id @default(autoincrement())
-  name      String @unique
-  type      String 
+  name      String 
   media     String
   project   Project @relation(fields: [projectId], references: [id])
   projectId Int
-  @@map("medias")
+  @@map("files")
 }
