@@ -22,6 +22,14 @@ async function getById(id: number) {
   return project;
 }
 
+async function getByUser(id: number) {
+  const project:any = await projectRepository.findByUser(id);
+  console.log(project)
+  if (!project) throw notFoundError();
+
+  return project;
+}
+
 async function get() {
   return projectRepository.getAll();
 }
@@ -46,5 +54,6 @@ export const projectService = {
   get,
   getById,
   saveFile,
+  getByUser,
   getFile
 };

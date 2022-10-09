@@ -64,6 +64,14 @@ async function get(req: Request, res: Response) {
   res.send(projects);
 }
 
+async function getByUser(req: Request, res: Response) {
+  const { id } = req.params;
+
+  const projects = await projectService.getByUser(Number(id));
+
+  res.send(projects).status(200);
+}
+
 async function getById(req: Request, res: Response) {
   const { id } = req.params;
 
@@ -76,5 +84,6 @@ export const projectController = {
   get,
   getById,
   fileSave,
+  getByUser,
   sendFile
 };

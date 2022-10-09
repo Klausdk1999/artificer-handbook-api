@@ -6,7 +6,8 @@ import { projectSchema } from "../schemas/projectSchemas";
 const projectRouter = Router();
 //validateSchemaMiddleware(projectSchema)
 projectRouter.post("/project", projectController.insert);
-projectRouter.get("/project", projectController.get);
+projectRouter.get("/projects", projectController.get);
+projectRouter.get("/projects/:id", projectController.getByUser);
 projectRouter.get("/project/:id", projectController.getById);
 projectRouter.post('/upload/:id', projectController.fileSave);
 projectRouter.get("/project/file/:id", projectController.sendFile);

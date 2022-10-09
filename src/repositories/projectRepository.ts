@@ -31,6 +31,10 @@ function findById(id: number) {
   });
 }
 
+function findByUser(id: number) {
+  return prisma.$queryRaw`SELECT * FROM projects WHERE "userId"=${id}`;
+}
+
 function findByTitle(title: string) {
   return prisma.project.findMany({
     where: { title:title },
@@ -48,6 +52,7 @@ export const projectRepository = {
   createFile,
   getAll,
   findById,
+  findByUser,
   findByTitle,
   remove,
   readFile
