@@ -4,8 +4,8 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "build": "tsc && npx prisma migrate deploy",
-    "start": "node ./dist/server.js",
+    "build": "tsc",
+    "start": "node ./dist/server.js && npx prisma migrate deploy",
     "dev": "dotenv -e .env nodemon src/server.ts",
     "prisma": "prisma deploy",
     "test": "dotenv -e .env.test npm run prisma && dotenv -e .env.test jest --no-cache"
