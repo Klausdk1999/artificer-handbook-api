@@ -5,7 +5,7 @@
   "main": "server.js",
   "scripts": {
     "build": "tsc",
-    "start": "node /dist/server.js && npx prisma migrate deploy",
+    "start": "node dist/src/server.js && npx prisma migrate deploy",
     "dev": "dotenv -e .env nodemon src/server.ts"
   },
   "keywords": [],
