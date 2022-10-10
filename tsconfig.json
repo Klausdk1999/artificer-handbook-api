@@ -1,12 +1,22 @@
+// {
+//   "compilerOptions": {
+//     // "target": "es6",  
+//     // "module":"CommonJS",  
+//     "esModuleInterop": true,
+//     "forceConsistentCasingInFileNames": true,
+//     "strict": false,
+//     "outDir": "dist",
+//     "skipLibCheck": true,
+//   }
+// }
 {
   "compilerOptions": {
     // "target": "es6",  
-    // "module":"CommonJS",  
+    "module":"CommonJS",  
+    "outDir": "dist",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "strict": false,
-    "outDir": "dist",
     "skipLibCheck": true,
   }
 }
-
