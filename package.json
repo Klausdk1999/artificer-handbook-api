@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc && npx prisma migrate deploy",
-    "start": "node ./dist/src/server.js",
-    "dev": "nodemon src/server.js",
+    "start": "node dist/server.js",
+    "dev": "nodemon src/server.ts",
     "prisma:reset": "prisma migrate reset",
     "prisma:migrate": "prisma migrate dev",
     "test:unit": "dotenv -e .env.test jest -- -i --coverage --testPathPattern=tests/unit"
