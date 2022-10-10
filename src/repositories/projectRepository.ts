@@ -32,7 +32,7 @@ function findById(id: number) {
 }
 
 function findByUser(id: number) {
-  return prisma.$queryRaw`SELECT * FROM projects WHERE "userId"=${id}`;
+  return prisma.$queryRaw`SELECT * FROM projects WHERE "userId"=${id} ORDER BY date DESC`;
 }
 
 function findByTitle(title: string) {

@@ -24,7 +24,6 @@ async function getById(id: number) {
 
 async function getByUser(id: number) {
   const project:any = await projectRepository.findByUser(id);
-  console.log(project)
   if (!project) throw notFoundError();
 
   return project;
@@ -44,8 +43,12 @@ async function saveFile(filepath:string,id:number,name:string) {
 }
 
 async function getFile(id:number) {
-
-  return await projectRepository.readFile(id);
+  const file= await projectRepository.readFile(id);
+  if(file.media!=null){
+    return  file;
+  }else{
+    throw notFoundError();
+  }  
   
 }
 

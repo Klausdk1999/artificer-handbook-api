@@ -12,6 +12,7 @@ async function insert(req: Request, res: Response) {
 }
 
 async function fileSave(req, res) {
+  
   let data;
   let uploadPath;
   let id = req.params.id;
@@ -19,11 +20,11 @@ async function fileSave(req, res) {
     return res.status(400).send('No files were uploaded.');
   }
   // The name of the input field (i.e. "data") is used to retrieve the uploaded file
-  data = req.files.data;
+  data = req.files.files;
   uploadPath = __dirname + '/storage/'+ id +". ."+ data.name;
 
   // Use the mv() method to place the file somewhere on your server
-  data.mv(uploadPath, function(err) {
+  await req.files.files.mv(uploadPath, function(err) {
     if (err)
       return res.status(500).send(err);
   });
@@ -33,28 +34,32 @@ async function fileSave(req, res) {
 
 async function sendFile(req , res) {
   const id = req.params.id;
-
+ 
   const file = await projectService.getFile(id);
-  if(file.media===null){
-    res.sendStatus(404);
-
-  }else{
-  const uploadPath=file.media;
-  const fs = require('fs')
-  const stream = require('stream')
-  const r = fs.createReadStream(uploadPath) // or any other way to get a readable stream
-  const ps = new stream.PassThrough() // <---- this makes a trick with stream error handling
-  stream.pipeline(
-   r,
-   ps, // <---- this makes a trick with stream error handling
-   (err) => {
-    if (err) {
-      console.log(err) // No such file or any other kind of error
-      return res.sendStatus(400); 
+  try{
+    if(file.media===null){
+      res.sendStatus(404);
+    }else{
+    const uploadPath=file.media;
+    const fs = require('fs')
+    const stream = require('stream')
+    const r = fs.createReadStream(uploadPath) // or any other way to get a readable stream
+    const ps = new stream.PassThrough() // <---- this makes a trick with stream error handling
+    stream.pipeline(
+     r,
+     ps, 
+     (err) => {
+      if (err) {
+        console.log(err) // No such file or any other kind of error
+        return res.sendStatus(400); 
+      }
+    })
+    ps.pipe(res) // <---- this makes a trick with stream error handling
     }
-  })
-  ps.pipe(res) // <---- this makes a trick with stream error handling
+  }catch{
+    res.sendStatus(404);
   }
+  
 }
 
 async function get(req: Request, res: Response) {
