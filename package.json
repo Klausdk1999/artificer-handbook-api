@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/server.js",
+    "build": "tsc && npx prisma migrate deploy",
+    "start": "node ./dist/src/server.js",
     "dev": "nodemon src/server.ts",
     "prisma:reset": "prisma migrate reset",
     "prisma:migrate": "prisma migrate dev",
