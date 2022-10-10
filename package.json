@@ -2,7 +2,7 @@
   "name": "artificers-handbook-api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "build": "tsc && npx prisma migrate deploy",
     "start": "node dist/server.js",
